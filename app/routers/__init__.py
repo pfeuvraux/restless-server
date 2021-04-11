@@ -1,7 +1,7 @@
 from app.routers import (
-  authentication
+  auth
 )
 
 __all__ = [
-  'authentication'
+  'auth'
 ]

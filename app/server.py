@@ -6,4 +6,4 @@ logger.debug('hey')
 api = FastAPI()
 
 logger.debug('Initializing routers...')
-api.include_router(app.routers.authentication.router)
+api.include_router(app.routers.auth.router)
