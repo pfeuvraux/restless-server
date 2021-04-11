@@ -5,7 +5,7 @@ from app.routers import (
 )
 
 logger.debug('hey')
-app = FastAPI()
+api = FastAPI()
 
 logger.debug('Initializing routers...')
-app.include_router(auth_router.router)
+api.include_router(auth_router.router)
