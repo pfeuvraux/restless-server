@@ -20,4 +20,6 @@ WORKDIR ./application
 
 RUN pipenv sync
 
-CMD pipenv run uvicorn app.server:api --host 0.0.0.0 --port 3000
+CMD \
+    pipenv run python tools/db/migrations/init_database.py && \
+    pipenv run uvicorn app.server:api --host 0.0.0.0 --port 3000

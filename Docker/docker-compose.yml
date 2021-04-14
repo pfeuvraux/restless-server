@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: '../'
+      dockerfile: Docker/api.Dockerfile
+    container_name: restless
+    ports:
+      - 3000:3000
+    depends_on:
+      - scylladb
+    networks:
+      - all_in_one
+
+  scylladb:
+    image: scylladb/scylla
+    container_name: scylladb
+    command: --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+    cpu_shares: 8
+    cpu_count: 8
+    ports:
+      - 9042:9042
+    networks:
+      - all_in_one
+
+networks:
+  all_in_one:
