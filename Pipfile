@@ -10,6 +10,7 @@ uvicorn = "*"
 fastapi = {extras = ["all"], version = "*"}
 asyncio = "*"
 pydantic = "*"
+scylla-driver = "*"
 
 [requires]
 python_version = "3.9.2"
