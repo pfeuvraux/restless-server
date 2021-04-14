@@ -11,6 +11,7 @@ fastapi = {extras = ["all"], version = "*"}
 asyncio = "*"
 pydantic = "*"
 scylla-driver = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.9.2"
