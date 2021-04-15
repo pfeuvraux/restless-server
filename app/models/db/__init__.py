@@ -1,26 +1,45 @@
 # //Init DB session
 
-from cassandra.cluster import Cluster
-from app.config import default_settings
-
-__cluster = Cluster(
-  default_settings['database']['hosts'],
-  port=default_settings['database']['port']
+import uuid
+from cassandra.cqlengine.models import Model
+from cassandra.cqlengine.management import sync_table
+from cassandra.cqlengine import (
+  columns,
+  connection
 )
-scylladb = __cluster.connect(
-  default_settings['database']['keyspace']
+from app.utils.logger import logger
+from app.config import settings
+
+logger.info('Connecting to database...')
+
+class User_by_id_Model(Model):
+  __table_name__ = "user_by_id"
+
+  user_id = columns.UUID(primary_key=True, default=uuid.uuid4, required=True)
+  username = columns.Text(required=True)
+  password = columns.Text(required=True)
+
+
+class User_by_username_Model(Model):
+  __table_name__ = "user_by_username"
+
+  username = columns.Text(primary_key=True, required=True)
+  user_id = columns.UUID(required=True)
+  password = columns.Text(required=True)
+
+
+connection.setup(
+  settings.database.hosts,
+  settings.database.keyspace,
+  port=settings.database.port,
+  protocol_version=settings.database.protocol_version
 )
+tables = [
+  User_by_id_Model,
+  User_by_username_Model
+]
 
-class ScyllaQuery:
-
-  def __init__(self, statement: str, params: list):
-    self.prep_statement = scylladb.prepare(statement)
-    self.cql_values = params
-
-  def run(self):
-
-    future = scylladb.execute_async(
-      self.prep_statement,
-      self.cql_values
-    )
-    return future.result()
+for table in tables:
+  logger.debug(f"Syncing {table.__table_name__}...")
+  sync_table(table)
+logger.debug('Done')

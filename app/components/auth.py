@@ -18,11 +18,7 @@ class RegisterUser:
       )
 
     user_attributes = get_user_attributes_by_username(self.user.username)
-    user_count = 0
-    for row in user_attributes:
-      user_count += 1
-
-    if user_count != 0:
+    if user_attributes is not None:
       raise HTTPException(
         status_code=status.HTTP_409_CONFLICT,
         detail="User already exists"

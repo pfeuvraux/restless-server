@@ -20,6 +20,8 @@ WORKDIR ./application
 
 RUN pipenv sync
 
+ENV CQLENG_ALLOW_SCHEMA_MANAGEMENT=yes
+
 CMD \
     pipenv run python tools/db/migrations/init_database.py && \
     pipenv run uvicorn app.server:api --host 0.0.0.0 --port 3000

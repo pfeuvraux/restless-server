@@ -1,8 +1,8 @@
+import os
 from fastapi import FastAPI
 from app.utils.logger import logger
 import app.routers
 
-logger.debug('hey')
 api = FastAPI()
 
 logger.debug('Initializing routers...')
