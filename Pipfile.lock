@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "673a05d1135476903aa17b6184442157023303369f8afcbf40f32b621f44c051"
+            "sha256": "2f12b807a8a4c2b82ba17a14e1a979fed4eb83f1f7ebb5745fb68d859e3bc5a1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -347,6 +347,10 @@
             ],
             "index": "pypi",
             "version": "==5.4.1"
+        },
+        "redis": {
+            "git": "https://github.com/andymccurdy/redis-py",
+            "ref": "6ed62fe23fd08b670af0bdf398176d3c59caa945"
         },
         "requests": {
             "hashes": [

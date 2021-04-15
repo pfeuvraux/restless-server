@@ -13,6 +13,7 @@ pydantic = "*"
 scylla-driver = "*"
 pyyaml = "*"
 srp = {git = "https://github.com/cocagne/pysrp", ref = "1.0.17"}
+redis = {git = "https://github.com/andymccurdy/redis-py", ref = "4.0"}
 
 [requires]
 python_version = "3.9.2"
