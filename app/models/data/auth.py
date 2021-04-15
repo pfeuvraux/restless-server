@@ -8,3 +8,7 @@ class UserCommon(BaseModel):
 class UserLogin_Out(BaseModel):
 
   token: str
+
+class Register_Out(BaseModel):
+
+  message: str
