@@ -10,10 +10,8 @@ def get_user_attributes_by_username(username: str):
   res = User_by_username_Model.objects.filter(username=username)
   try:
     return res.get()
-  except User_by_username_Model.DoesNotExist as err:
+  except User_by_username_Model.DoesNotExist:
     return None
-  except Exception as err:
-    raise Exception(err)
 
 def create_user(username: str, password: str):
 
