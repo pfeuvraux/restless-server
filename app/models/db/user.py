@@ -13,7 +13,7 @@ def describe_user_by_username(username: str):
   except User_by_username_Model.DoesNotExist:
     return None
 
-def create_user(username: str, password: str):
+def create_user(username: str, password: str) -> None:
 
   user_id = uuid4()
 
@@ -29,4 +29,4 @@ def create_user(username: str, password: str):
     password=password
   )
 
-  return True
+  pass
