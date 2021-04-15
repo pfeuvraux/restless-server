@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 from app.models.db.user import (
-  get_user_attributes_by_username,
+  describe_user_by_username,
   create_user
 )
 
@@ -17,7 +17,7 @@ class RegisterUser:
         detail="Username must be alphanumeric"
       )
 
-    user_attributes = get_user_attributes_by_username(self.user.username)
+    user_attributes = describe_user_by_username(self.user.username)
     if user_attributes is not None:
       raise HTTPException(
         status_code=status.HTTP_409_CONFLICT,

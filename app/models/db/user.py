@@ -5,7 +5,7 @@ from app.models.db import (
 )
 from uuid import uuid4
 
-def get_user_attributes_by_username(username: str):
+def describe_user_by_username(username: str):
 
   res = User_by_username_Model.objects.filter(username=username)
   try:
