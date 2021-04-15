@@ -12,6 +12,7 @@ asyncio = "*"
 pydantic = "*"
 scylla-driver = "*"
 pyyaml = "*"
+srp = {git = "https://github.com/cocagne/pysrp"}
 
 [requires]
 python_version = "3.9.2"
