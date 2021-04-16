@@ -14,20 +14,26 @@ logger.info('Connecting to database...')
 logger.debug('Contact points:')
 logger.debug(settings.database.hosts)
 
+
+"""USER MODELS"""
+
 class User_by_id_Model(Model):
   __table_name__ = "user_by_id"
 
   user_id = columns.UUID(primary_key=True, default=uuid.uuid4, required=True)
   username = columns.Text(required=True)
-  password = columns.Text(required=True)
-
+  srp_salt = columns.Text(required=True)
+  srp_verifier = columns.Text(required=True)
 
 class User_by_username_Model(Model):
   __table_name__ = "user_by_username"
 
   username = columns.Text(primary_key=True, required=True)
   user_id = columns.UUID(required=True)
-  password = columns.Text(required=True)
+  srp_salt = columns.Text(required=True)
+  srp_verifier = columns.Text(required=True)
+
+"""END USER MODELS"""
 
 
 connection.setup(
