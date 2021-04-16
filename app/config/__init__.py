@@ -41,5 +41,4 @@ class Settings(BaseSettings):
         init_settings
       )
 
-
 settings = Settings()
