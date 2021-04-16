@@ -10,10 +10,10 @@ router = APIRouter(
 )
 
 @router.post("/login",
-  response_model=auth_datamodel.UserLogin_Out,
+  response_model=auth_datamodel.Login_Out,
   status_code=http_codes.HTTP_200_OK
 )
-async def login(user: auth_datamodel.UserCommon):
+def login(user: auth_datamodel.Login_In):
   pass
 
 @router.post('/register',
@@ -22,11 +22,11 @@ async def login(user: auth_datamodel.UserCommon):
   responses={
     409: {
       "description": "User already exists",
-      "model": auth_datamodel.HTTP_409_CODE_Model
+      "model": auth_datamodel.Register_HTTP_409
     }
   }
 )
-async def register(user: auth_datamodel.UserCommon):
+def register(user: auth_datamodel.Register_In):
 
   register_user = RegisterUser(model=user)
   res = register_user()

@@ -25,7 +25,8 @@ class RegisterUser:
 
     create_user(
       username=self.user.username,
-      password=self.user.password
+      srp_salt=self.user.srp_salt,
+      srp_verifier=self.user.srp_verifier
     )
 
     return {

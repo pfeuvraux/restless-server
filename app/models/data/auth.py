@@ -1,6 +1,15 @@
 from pydantic import BaseModel
 
-class HTTP_409_CODE_Model(BaseModel):
+class Login_In(BaseModel):
+
+  TBD: str # TO BE DEFINED
+
+class Login_Out(BaseModel):
+
+  token: str
+
+
+class Register_HTTP_409(BaseModel):
 
   detail: str
 
