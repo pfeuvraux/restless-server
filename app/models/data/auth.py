@@ -4,14 +4,11 @@ class HTTP_409_CODE_Model(BaseModel):
 
   detail: str
 
-class UserCommon(BaseModel):
+class Register_In(BaseModel):
 
   username: str
-  password: str
-
-class UserLogin_Out(BaseModel):
-
-  token: str
+  srp_salt: str
+  srp_verifier: str
 
 class Register_Out(BaseModel):
 
