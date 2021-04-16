@@ -2,7 +2,7 @@
 
 from cassandra.cluster import Cluster
 
-cluster = Cluster(['172.18.0.2'])
+cluster = Cluster(['localhost'])
 session = cluster.connect()
 
 keyspace_name = "restless"
