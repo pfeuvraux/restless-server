@@ -1,22 +1,45 @@
+import os
+from yaml import (
+  SafeLoader,
+  load
+)
 from pydantic import (
   BaseSettings,
   BaseModel
 )
 from typing import Any
+from pathlib import Path
 
-class Config_Database(BaseModel):
+def default_yaml_source_settings(settings: BaseSettings):
 
-  hosts: list[str] = ["172.22.0.2"]
+  curr_dir = os.path.dirname(os.path.abspath(__file__))
+
+  return load(Path(f"{curr_dir}/defaults.yml").read_text('utf-8'))
+
+class Database_Config(BaseModel):
+
+  hosts: list[str] = ['localhost']
   port: int = 9042
   keyspace: str = "restless"
   protocol_version: int = 4
 
 class Settings(BaseSettings):
 
-  database: Config_Database = Config_Database()
+  database: Database_Config = Database_Config()
 
   class Config:
-      env_prefix = "restless_env_"
+
+    @classmethod
+    def customise_sources(
+      cls,
+      init_settings,
+      env_settings,
+      file_secret_settings
+    ):
+      return (
+        default_yaml_source_settings,
+        init_settings
+      )
 
 
 settings = Settings()
