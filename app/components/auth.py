@@ -11,17 +11,16 @@ class RegisterUser:
 
   def __call__(self):
 
+    if self.user_exists():
+      raise HTTPException(
+        status_code=status.HTTP_409_CONFLICT,
+        detail="User already exists"
+      )
+
     if not self.user.username.isalnum():
       raise HTTPException(
         status_code=status.HTTP_400_BAD_REQUEST,
         detail="Username must be alphanumeric"
-      )
-
-    user_attributes = describe_user_by_username(self.user.username)
-    if user_attributes is not None:
-      raise HTTPException(
-        status_code=status.HTTP_409_CONFLICT,
-        detail="User already exists"
       )
 
     create_user(
@@ -32,3 +31,11 @@ class RegisterUser:
     return {
       "message": "User successfully registered"
     }
+
+
+  def user_exists(self) -> bool:
+
+    user_attributes = describe_user_by_username(self.user.username)
+    if user_attributes is not None:
+      return True
+    return False
