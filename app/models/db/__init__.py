@@ -11,6 +11,8 @@ from app.utils.logger import logger
 from app.config import settings
 
 logger.info('Connecting to database...')
+logger.debug('Contact points:')
+logger.debug(settings.database.hosts)
 
 class User_by_id_Model(Model):
   __table_name__ = "user_by_id"
