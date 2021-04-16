@@ -21,7 +21,8 @@ async def login(user: auth_datamodel.UserCommon):
   response_model=auth_datamodel.Register_Out,
   responses={
     409: {
-      "description": "User already exists"
+      "description": "User already exists",
+      "model": auth_datamodel.HTTP_409_CODE_Model
     }
   }
 )

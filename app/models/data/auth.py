@@ -1,5 +1,9 @@
 from pydantic import BaseModel
 
+class HTTP_409_CODE_Model(BaseModel):
+
+  detail: str
+
 class UserCommon(BaseModel):
 
   username: str
