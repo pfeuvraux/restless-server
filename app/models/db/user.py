@@ -21,18 +21,13 @@ def create_user(
 
   user_id = uuid4()
 
-  User_by_id_Model.objects.create(
-    user_id=user_id,
-    username=username,
-    srp_salt=srp_salt,
-    srp_verifier=srp_verifier
-  )
-
-  User_by_username_Model.objects.create(
-    user_id=user_id,
-    username=username,
-    srp_salt=srp_salt,
-    srp_verifier=srp_verifier
-  )
+  query_params = {
+    "user_id": user_id,
+    "username": username,
+    "srp_salt": srp_salt,
+    "srp_verifier": srp_verifier
+  }
+  User_by_id_Model.objects.create(**query_params)
+  User_by_username_Model.objects.create(**query_params)
 
   pass
