@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 uvicorn = "*"
+requests = "*"
 
 [packages]
 fastapi = {extras = ["all"], version = "*"}
