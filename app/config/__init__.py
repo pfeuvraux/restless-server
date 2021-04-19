@@ -14,7 +14,10 @@ def default_yaml_source_settings(settings: BaseSettings):
 
   curr_dir = os.path.dirname(os.path.abspath(__file__))
 
-  return load(Path(f"{curr_dir}/defaults.yml").read_text('utf-8'))
+  return load(
+    Path(f"{curr_dir}/defaults.yml").read_text('utf-8'),
+    Loader=SafeLoader
+  )
 
 class Database_Config(BaseModel):
 
@@ -23,9 +26,15 @@ class Database_Config(BaseModel):
   keyspace: str = "restless"
   protocol_version: int = 4
 
+class Cache_Config(BaseModel):
+
+  host: str = 'localhost'
+  port: int = 6379
+
 class Settings(BaseSettings):
 
   database: Database_Config = Database_Config()
+  cache: Cache_Config = Cache_Config()
 
   class Config:
 

@@ -6,3 +6,7 @@ database:
   port: 9042
   keyspace: restless
   protocol_version: 4
+
+cache:
+  host: localhost
+  port: 6379
