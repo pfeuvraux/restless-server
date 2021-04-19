@@ -22,5 +22,13 @@ services:
     networks:
       - all_in_one
 
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - all_in_one
+
 networks:
   all_in_one:
