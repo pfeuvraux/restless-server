@@ -1,8 +1,16 @@
 from pydantic import BaseModel
+from enum import Enum
+from typing import Any
+
+class Login_SrpPhase(str, Enum):
+
+  challenge = "challenge"
+  verify = "verify"
 
 class Login_In(BaseModel):
 
-  TBD: str # TO BE DEFINED
+  username: str
+  srp_params: list[str]
 
 class Login_Out(BaseModel):
 
