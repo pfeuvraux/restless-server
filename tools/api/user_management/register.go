@@ -21,9 +21,9 @@ type RegisterArgs struct {
 }
 
 type RegisterUserAttributes struct {
-	Username     string      `json:"username"`
-	Srp_verifier interface{} `json:"srp_verifier"`
-	Srp_salt     string      `json:"srp_salt"`
+	Username     string `json:"username"`
+	Srp_verifier string `json:"srp_verifier"`
+	Srp_salt     string `json:"srp_salt"`
 }
 
 func NewUserAttributes(username string) *RegisterUserAttributes {
