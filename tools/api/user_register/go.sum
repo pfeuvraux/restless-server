@@ -1,0 +1,11 @@
+github.com/alexflint/go-arg v1.4.1 h1:QX73/uQKvH/veFcp6RQY4RFyB4fPGSloi3VJSBE61Uo=
+github.com/alexflint/go-arg v1.4.1/go.mod h1:9iRbDxne7LcR/GSvEr7ma++GLpdIU1zrghf2y2768kM=
+github.com/alexflint/go-scalar v1.0.0 h1:NGupf1XV/Xb04wXskDFzS0KWOLH632W/EO4fAFi+A70=
+github.com/alexflint/go-scalar v1.0.0/go.mod h1:GpHzbCOZXEKMEcygYQ5n/aa4Aq84zbxjy3MxYW0gjYw=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/kong/go-srp v0.0.0-20191210190804-cde1efa3c083 h1:Y7nibF/3Ivmk+S4Q+KzVv98lFlSdrBhYzG44d5il85E=
+github.com/kong/go-srp v0.0.0-20191210190804-cde1efa3c083/go.mod h1:Zde5RRLiH8/2zEXQDHX5W0dOOTxkemzrXMhHVfxTtTA=
+github.com/mazen160/go-random v0.0.0-20210308102632-d2b501c85c03 h1:iM7JTVzKOYKWjzhGcgHAgFVQt5QfiHIVrRUaWPfh0Q4=
+github.com/mazen160/go-random v0.0.0-20210308102632-d2b501c85c03/go.mod h1:APoDd0B2pYeB5kU/g7Mw14mFsljp5HfzrC7arsKbi8U=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
