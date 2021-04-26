@@ -24,6 +24,8 @@ class User_by_id_Model(Model):
   username = columns.Text(required=True)
   srp_salt = columns.Text(required=True)
   srp_verifier = columns.Text(required=True)
+  kek_salt = columns.Text(required=True)
+  cek = columns.Text(required=True)
 
 class User_by_username_Model(Model):
   __table_name__ = "user_by_username"
@@ -32,6 +34,8 @@ class User_by_username_Model(Model):
   user_id = columns.UUID(required=True)
   srp_salt = columns.Text(required=True)
   srp_verifier = columns.Text(required=True)
+  kek_salt = columns.Text(required=True)
+  cek = columns.Text(required=True)
 
 """END USER MODELS"""
 
