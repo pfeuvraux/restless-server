@@ -29,7 +29,9 @@ class RegisterUser:
     create_user(
       username=self.user.username,
       srp_salt=self.user.srp_salt,
-      srp_verifier=self.user.srp_verifier
+      srp_verifier=self.user.srp_verifier,
+      kek_salt=self.user.kek_salt,
+      cek=self.user.cek
     )
 
     return {

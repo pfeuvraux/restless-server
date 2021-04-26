@@ -26,6 +26,8 @@ class Register_In(BaseModel):
   username: str
   srp_salt: str
   srp_verifier: str
+  kek_salt: str
+  cek: str
 
 class Register_Out(BaseModel):
 
