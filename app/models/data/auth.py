@@ -1,21 +1,21 @@
 from pydantic import BaseModel
 from enum import Enum
-from typing import Any
+from typing import (
+  Dict,
+  Any,
+  Optional
+)
 
 class Login_SrpPhase(str, Enum):
 
   challenge = "challenge"
   verify = "verify"
+  init = "init"
 
 class Login_In(BaseModel):
 
   username: str
-  srp_params: list[str]
-
-class Login_Out(BaseModel):
-
-  token: str
-
+  srp_params: Optional[Any]
 
 class Register_HTTP_409(BaseModel):
 

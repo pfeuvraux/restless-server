@@ -60,20 +60,28 @@ class LoginUser:
       username=self.user.username
     )
 
-    route = getattr(self, srp_phase)
-    return route(
-      salt=b64decode(user_attributes.srp_salt).decode('utf-8'),
-      vkey=b64decode(user_attributes.srp_verifier).decode('utf-8')
-    )
+    if user_attributes is None:
+      raise HTTPException(
+        status_code=400
+      )
 
-  def srp_challenge(self, salt, vkey):
+    srp_phase = getattr(self, srp_phase)
+    return srp_phase(user_attributes, self.user.srp_params)
 
 
+  def srp_init(self, user_attrs, params):
+
+    salt = user_attrs.srp_salt
     return {
-      "token": "challenge"
+      "salt": salt
     }
 
-  def srp_verify(self, salt, vkey):
+
+  def srp_challenge(self, user_attrs, params):
+
+    return {}
+
+  def srp_verify(self, user_attrs, params):
     return {
       "token": "verify"
     }

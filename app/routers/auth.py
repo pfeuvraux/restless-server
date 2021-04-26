@@ -12,7 +12,6 @@ router = APIRouter(
 
 
 @router.post("/login/{srp_phase}",
-  response_model=auth_datamodel.Login_Out,
   status_code=http_codes.HTTP_200_OK
 )
 def login(
