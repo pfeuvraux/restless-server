@@ -66,7 +66,8 @@ class LoginUser:
 
     if user_attributes is None:
       raise HTTPException(
-        status_code=400
+        status_code=400,
+        detail="User doesn't exist."
       )
 
     srp_phase = getattr(self, srp_phase)
@@ -81,7 +82,7 @@ class LoginUser:
     }
 
 
-  def srp_challenge(self, user_attrs, A):
+  def srp_challenge(self, user_attrs, params):
 
     """Challenge phase
 
@@ -92,9 +93,10 @@ class LoginUser:
 
     srp.rfc5054_enable()
 
-    A = b64decode(A)
+    A = b64decode(params['srpA'])
     srp_salt = b64decode(user_attrs.srp_salt)
     srp_verifier = b64decode(user_attrs.srp_verifier)
+
 
     srp_instance = srp.Verifier(user_attrs.username, srp_salt, srp_verifier, A, ng_type=srp.NG_4096, hash_alg=srp.SHA256)
     s, B = srp_instance.get_challenge()
@@ -106,8 +108,8 @@ class LoginUser:
       )
 
     return {
-      "s": b64encode(s),
-      "B": b64encode(B)
+      "s": b64encode(s).decode('utf-8'),
+      "B": b64encode(B).decode('utf-8')
     }
 
   def srp_verify(self, user_attrs, srp_params):
@@ -123,19 +125,19 @@ class LoginUser:
 
     A = b64decode(srp_params['srpA'])
     M1 = b64decode(srp_params['M1'])
-    srp_secret = b64decode(srp_params['secret'])
 
     srp_salt = b64decode(user_attrs.srp_salt)
     srp_verifier = b64decode(user_attrs.srp_verifier)
 
-    srp_instance = srp.Verifier(user_attrs.username, srp_salt, srp_verifier, A, ng_type=srp.NG_4096, hash_alg=srp.SHA256, bytes_b=srp_secret)
+    srp_instance = srp.Verifier(user_attrs.username, srp_salt, srp_verifier, A, ng_type=srp.NG_4096, hash_alg=srp.SHA256)
 
     M2 = srp_instance.verify_session(M1)
+
     if M2 is None:
       raise HTTPException(
         status_code=400,
         detail="SRP M2 parameter is not valid."
       )
-    print(M2)
-    print("ntm")
-    return {}
+    return {
+      "M2": b64encode(M2).decode('utf-8')
+    }
