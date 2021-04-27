@@ -5,7 +5,10 @@ from app.models.db.user import (
   create_user
 )
 import srp
-from base64 import b64decode
+from base64 import (
+  b64decode,
+  b64encode
+)
 
 class RegisterUser:
 
@@ -48,6 +51,7 @@ class RegisterUser:
 
 class LoginUser:
 
+
   def __init__(self, model, srp_phase):
     self.user = model
     self.srp_phase = srp_phase
@@ -77,11 +81,61 @@ class LoginUser:
     }
 
 
-  def srp_challenge(self, user_attrs, params):
+  def srp_challenge(self, user_attrs, A):
 
-    return {}
+    """Challenge phase
 
-  def srp_verify(self, user_attrs, params):
+    1. Gets A # base64-encoded
+    2. Computes
+    3. Gives B
+    """
+
+    srp.rfc5054_enable()
+
+    A = b64decode(A)
+    srp_salt = b64decode(user_attrs.srp_salt)
+    srp_verifier = b64decode(user_attrs.srp_verifier)
+
+    srp_instance = srp.Verifier(user_attrs.username, srp_salt, srp_verifier, A, ng_type=srp.NG_4096, hash_alg=srp.SHA256)
+    s, B = srp_instance.get_challenge()
+
+    if s is None or B is None:
+      raise HTTPException(
+        status_code=401,
+        detail="Failed SRP challenge."
+      )
+
     return {
-      "token": "verify"
+      "s": b64encode(s),
+      "B": b64encode(B)
     }
+
+  def srp_verify(self, user_attrs, srp_params):
+
+    """Verify phase
+
+    1. Gets M1
+    2. Computes
+    3. Gives M2
+    """
+
+    #srp.rfc5054_enable()
+
+    A = b64decode(srp_params['srpA'])
+    M1 = b64decode(srp_params['M1'])
+    srp_secret = b64decode(srp_params['secret'])
+
+    srp_salt = b64decode(user_attrs.srp_salt)
+    srp_verifier = b64decode(user_attrs.srp_verifier)
+
+    srp_instance = srp.Verifier(user_attrs.username, srp_salt, srp_verifier, A, ng_type=srp.NG_4096, hash_alg=srp.SHA256, bytes_b=srp_secret)
+
+    M2 = srp_instance.verify_session(M1)
+    if M2 is None:
+      raise HTTPException(
+        status_code=400,
+        detail="SRP M2 parameter is not valid."
+      )
+    print(M2)
+    print("ntm")
+    return {}
