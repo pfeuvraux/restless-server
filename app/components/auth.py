@@ -119,7 +119,7 @@ class LoginUser:
     3. Gives M2
     """
 
-    #srp.rfc5054_enable()
+    srp.rfc5054_enable()
 
     A = b64decode(srp_params['srpA'])
     M1 = b64decode(srp_params['M1'])
